@@ -13,7 +13,7 @@ class PhotoController extends Controller
      */
     public function index()
     {
-       return "Index : List Table";   
+        return 'Index';
     }
 
     /**
@@ -23,7 +23,7 @@ class PhotoController extends Controller
      */
     public function create()
     {
-       return "Create :Create Form";
+        return 'create';
     }
 
     /**
@@ -34,7 +34,8 @@ class PhotoController extends Controller
      */
     public function store(Request $request)
     {
-        return "Store :Add Data to Table";
+        echo 'store';
+        dd($request);
     }
 
     /**
@@ -45,7 +46,7 @@ class PhotoController extends Controller
      */
     public function show($id)
     {
-      return "Show ID:".$id." Show Data detail";
+        return 'show :'.$id;
     }
 
     /**
@@ -56,7 +57,7 @@ class PhotoController extends Controller
      */
     public function edit($id)
     {
-        return "Edit ID :".$id." Edit Sata by ID";
+        return 'edit :'.$id;
     }
 
     /**
@@ -68,8 +69,8 @@ class PhotoController extends Controller
      */
     public function update(Request $request, $id)
     {
+        echo 'update :'.$id;
         dd($request);
-        return "Update Data ID".$id." :Save Data by ID";
     }
 
     /**
@@ -80,6 +81,6 @@ class PhotoController extends Controller
      */
     public function destroy($id)
     {
-       return "Delete Data ID ".$id." :Delete Data ";
+        return 'destroy :'.$id;
     }
 }

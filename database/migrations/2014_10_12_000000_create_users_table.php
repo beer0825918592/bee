@@ -13,10 +13,10 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-             Schema::create('users', function (Blueprint $table) {
+        Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('surname')->nullable();
+            $table->string('surname');
             $table->string('email')->unique();
             $table->string('password');
             $table->integer('age')->default(0);
@@ -24,10 +24,10 @@ class CreateUsersTable extends Migration
             $table->string('city')->nullable();
             $table->string('mobile')->nullable();
             $table->integer('active')->default(1);
+            $table->string('api_token', 60)->unique()->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
-
 
     }
 

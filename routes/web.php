@@ -15,39 +15,48 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('foo', function () {
-    return 'Hello World';
-});
-
-Route::get('demoone', 'DemoController@index');
-
 Route::post('/demotwo', 'DemoController@demotwo');
 
-Route::match(['get', 'post'], '/demothree', 'DemoController@demothree');
+Route::match(['get', 'post', 'delete'], '/demothree', 'DemoController@demothree');
 
 Route::any('/demofour', 'DemoController@demofour');
-
-Route::get('demofive/{id}', function ($id) {
-    return 'ID: '.$id;
-});
-
 
 Route::get('demosix/{id}/{name}', function ($id, $name) {
     return 'ID: '.$id.' || NAME: '.$name;
 });
 
-Route::get('demoseven/{id}', function ($id) {
-    return 'demoseven ID: '.$id;
-})->where('id', '[0-9]+');
 
-Route::get('demoeight/{name}', function ($name) {
-    return 'demoeight NAME: '.$name;
-})->where('name', '[A-Za-z]+');
+Route::group(['middleware' => ['XSS']], function () {
+    Route::get('demoone', 'DemoController@index');
+});
 
-Route::get('demonine/{id}/{name}', function ($id, $name) {
-    return 'demonine ID: '.$id.' || NAME: '.$name;
-})->where(['id' => '[0-9]+', 'name' => '[a-z]+']);
+Route::prefix('demo')->group(function () {
+    Route::any('demofour', 'DemoController@demofour');
+    Route::get('demoone', 'DemoController@index');
+    //Route::get('one', 'DemoController@index');
+});
+
+Route::prefix('{lang}')->middleware('lang')->group(function ($local) {
+    App::setlocale('en');
+    Route::get('demox', 'DemoController@index');
+});
+
+Route::get('demoten/age/{age}/school/{school}', function ($age, $school) {
+    return 'demoten age: '.$age.' || SCHOOL: '.$school;
+});
 
 Route::resource('photos', 'PhotoController');
-Route::resource('admin/users','Admin\UsersController');
 
+Route::get('login', 'LoginController@index')->name('login');
+Route::get('logout', 'LoginController@logout');
+Route::post('login', 'LoginController@authenticate');
+
+//Route::resource('admin/user', 'Admin\UsersController');
+Route::prefix('admin')->middleware('auth')->group(function () {
+    Route::resource('users', 'Admin\UsersController');
+    Route::get('demoone', 'DemoController@index');
+});
+
+Route::get('testexcel','DemoController@testexcel');
+
+Route::get('/testlinenoti', 'DemoController@testlinenoti');

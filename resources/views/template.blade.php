@@ -8,20 +8,16 @@
   <meta name="author" content="">
   <title>SB Admin - Start Bootstrap 4 Template</title>
   <!-- Bootstrap core CSS-->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <!--<link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">-->
+  <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
 
   <!-- Custom fonts for this template-->
-  <!--<link href="{{ asset('assets/vendor/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">-->
-  <link href="assets/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link href="{{ asset('assets/vendor/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
 
   <!-- Page level plugin CSS-->
-  <link href="assets/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
-  <!--<link href="{{ asset('assets/vendor/datatables/dataTables.bootstrap4.css') }}" rel="stylesheet">-->
+  <link href="{{ asset('assets/vendor/datatables/dataTables.bootstrap4.css') }}" rel="stylesheet">
 
   <!-- Custom styles for this template-->
-  <!--<link href="{{ asset('css/sb-admin.css') }}" rel="stylesheet">-->
-  <link href="css/sb-admin.css" rel="stylesheet">
+  <link href="{{ asset('css/sb-admin.css') }}" rel="stylesheet">
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -279,7 +275,7 @@
 
 
 
-    <!-- #################### headers/top Start #################### -->
+    <!-- #################### headers/footer Start #################### -->
     <footer class="sticky-footer">
       <div class="container">
         <div class="text-center">
@@ -292,7 +288,7 @@
     <a class="scroll-to-top rounded" href="#page-top">
       <i class="fa fa-angle-up"></i>
     </a>
-    <!-- #################### headers/top Start #################### -->
+    <!-- #################### headers/footer Start #################### -->
 
 
 
@@ -320,30 +316,21 @@
 
 
     <!-- Bootstrap core JavaScript-->
-    <!--<script src="{{ asset('assets/vendor/jquery/jquery.min.js') }}"></script>-->
-    <script src="assets/vendor/jquery/jquery.min.js"></script>
+    <script src="{{ asset('assets/vendor/jquery/jquery.min.js') }}"></script>
 
-    <!--<script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>-->
-    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
     <!-- Core plugin JavaScript-->
-    <!--<script src="{{ asset('assets/vendor/jquery-easing/jquery.easing.min.js') }}"></script>-->
-    <script src="assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="{{ asset('assets/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
 
     <!-- Page level plugin JavaScript-->
-    <!--<script src="{{ asset('assets/vendor/datatables/jquery.dataTables.js') }}"></script>-->
     <script src="{{ asset('assets/vendor/datatables/jquery.dataTables.js') }}"></script>
 
-    <!--<script src="{{ asset('assets/vendor/datatables/dataTables.bootstrap4.js') }}"></script>-->
-    <script src="assets/vendor/datatables/dataTables.bootstrap4.js"></script>
+    <script src="{{ asset('assets/vendor/datatables/dataTables.bootstrap4.js') }}"></script>
 
     <!-- Custom scripts for all pages-->
-    <!--<script src="{{ asset('js/sb-admin.min.js') }}"></script>-->
-    <script src="js/sb-admin.min.js"></script>
+    <script src="{{ asset('js/sb-admin.min.js') }}"></script>
 
-    <!-- Custom scripts for this page-->
-    <!--<script src="{{ asset('js/sb-admin-datatables.min.js') }}"></script>-->
-    <script src="js/sb-admin-datatables.min.js"></script>
   </div>
 </body>
 

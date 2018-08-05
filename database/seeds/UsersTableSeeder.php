@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+
 class UsersTableSeeder extends Seeder
 {
     /**
@@ -11,7 +11,7 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        $cities = array("bangkok", "nakornpathom");
+          $cities = array("bangkok", "nakornpathom");
 
           for($i=1; $i<=100; $i++) {
               $key   = array_rand($cities);
@@ -29,7 +29,5 @@ class UsersTableSeeder extends Seeder
                 'active'   => rand(0,1)
             ]);
           }
-
-
     }
 }

@@ -41,8 +41,7 @@
     <div class="container-fluid">
 
       <!-- #################### Main Start #################### -->
-     @yield('content')
-      <h1>CONTENT BLOCK</h1>
+      @yield('content')
       <!-- #################### Main Start #################### -->
 
     </div>

@@ -10,8 +10,8 @@ class ProductsTableSeeder extends Seeder
      * @return void
      */
     public function run()
-    {  
-    	for($i=1; $i<=100; $i++) {
+    {
+        for($i=1; $i<=100; $i++) {
             for($product=1; $product<=5; $product++) {
                 DB::table('products')->insert([
                     'user_id'   => $i,
@@ -21,7 +21,6 @@ class ProductsTableSeeder extends Seeder
                     'status'    => rand(0,1)
                 ]);
             }
-
+        }
     }
-}
 }

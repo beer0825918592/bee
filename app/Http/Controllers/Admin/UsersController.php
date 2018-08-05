@@ -4,9 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+//use App\User;
 use App\User as UserMod;
 use App\Model\Shop as ShopMod;
 use App\Model\Product as ProductMod;
+use App\Model\City as CityMod;
+use App\Http\Requests\UserRequest;
+
 class UsersController extends Controller
 {
     /**
@@ -16,62 +20,62 @@ class UsersController extends Controller
      */
     public function index()
     {
-         /* return view('test')
-          ->with('name', 'My Name')
-          ->with('email','test@gmail.com');
-          */
-        /*    $data = [
-            'name' => 'My Name',
-            'surname' => 'My SurName',
-            'email' => ' email@gmail.com'
-        ];
-        
-         $item = [
-            'item1' => 'My Value1',
-            'item2' => 'My Value2'
-        ];
+        $mods = UserMod::paginate(5);
+        return view('admin.user.lists', compact('mods') );
 
-        $results = [
-            'data' => $data,
-            'item' => $item
-        ];
 
-        return view('test', $results);*/
-   /*  $mods = UserMod::all();
-        return view('test', compact('mods'));*/
-       /*  $data = [
-           'name' => 'My Name',
-           'surname' => 'My SurName',
-           'email' => 'myemail@gmail.com'
-       ];
+
+
+
+        /*$shop = ProductMod::find(6)->shop;
+        echo "<br /> Product is belongs to Shop :".$shop->name;*/
+
+        /*$shop = ShopMod::find(1);
+        echo "<br /> Shop :".$shop->name;
+        echo "<br /> Shop is belongs to :".$shop->user->name;*/
+
+        /*$products = ShopMod::find(1)->products;
+        //dd($products);
+
+        foreach ($products as $item) {
+            //dd($item); exit;
+            echo "<br /> Product :".$item->name." : ".$item->desc;
+        }*/
+
+
+        /*$user = UserMod::find(1);
+        echo "<br /> User :".$user->name;
+
+        $shop = UserMod::find(1)->shop;
+        echo "<br /> Shop name :".$shop->name;
 
         $user = UserMod::find(1);
-        $mods = UserMod::all();
-
-        return view('test', compact('data', 'user', 'mods'));*/
-   // return view ('admin.layouts.template');
-       // return view('admin.user.lists');
-
-   $mods = UserMod::paginate(10);
-    return view('admin.user.lists', compact('mods') );
+        echo "<br /> Shop name2 :".$user->shop->name;*/
 
 
 
- 
+        /*$mods = UserMod::where('active', 1)
+               ->where('city', 'bangkok')
+               ->where('name', 'like', '%user2%')
+               ->get();
 
-      /* $mods = UserMod::where('active', 1)
-               ->where('city','bangkok')
-               ->orderBy('name', 'desc')
-               //->take(10)
-               ->get();*/
-            /*$mods = UserMod::find([1, 2, 3]);
+        foreach ($mods as $item) {
+            echo $item->name." : ".$item->email."<br />";
+        }*/
 
-            foreach ($mods as $item) {
-            echo $item->name." ".$item->surname." ".$item->email."<br />";
+        /*$mod = UserMod::find(1);
+        echo "Name :".$mod->name."<br /><br />";
 
-            }*/
-         /*   $count = UserMod::where('active', 1)->count();
-        echo "Total Rows : ".$count ;*/
+        $mods = UserMod::find([1,3,4]);
+        foreach ($mods as $item) {
+            echo $item->name." : ".$item->email."<br />";
+        }
+
+        $max = UserMod::where('active', 1)->max('age');
+        //echo "<br /> Age Max :".$max;*/
+
+        $count = UserMod::where('active', 1)->count();
+        //echo "<br /> Co :".$max;
 
     }
 
@@ -82,7 +86,8 @@ class UsersController extends Controller
      */
     public function create()
     {
-        //
+        $cities = CityMod::all();
+        return view('admin.users.create', compact('cities'));
     }
 
     /**
@@ -93,7 +98,34 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        request()->validate([
+            'name' => 'required|min:2|max:50',
+            'surname' => 'required|min:2|max:50',
+            'mobile' => 'required|numeric',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:6',
+            'age' => 'required|numeric',
+            'confirm_password' => 'required|min:6|max:20|same:password',
+        ], [
+            'name.required' => 'Name is required',
+            'name.min' => 'Name must be at least 2 characters.',
+            'name.max' => 'Name should not be greater than 50 characters.',
+        ]);
+
+
+        $mod = new UserMod;
+        $mod->email    = $request->email;
+        $mod->password = bcrypt($request->password);
+        $mod->name     = $request->name;
+        $mod->surname  = $request->surname;
+        $mod->mobile   = $request->mobile;
+        $mod->age      = $request->age;
+        $mod->address  = $request->address;
+        $mod->city     = $request->city;
+        $mod->save();
+
+        return redirect('admin/users')
+                    ->with('success', 'User ['.$request->name.'] created successfully.');
     }
 
     /**
@@ -104,39 +136,7 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        /*$mod = UserMod::find($id);
-        echo $mod->name ;*/
-      /*  echo "<br />";
-       // $mod = UserMod::find($id);
-       // echo $mod->shop->name;
-
-        $mod = ShopMod::find($id);
-        echo $mod->name;
-        echo "<br />";
-        echo $mod->user->name;*/
-      /*  $products = ShopMod::find($id)->products;
- 
-         foreach ($products as $product) {
-            echo $product->name;
-            echo "<br /><br />";
-    
-           }
-          echo " Or <br /><br />";
-
-           
-
-            foreach($products as $product){
-                    echo $product->name;
-                    echo "<br />";
-
-            }*/
-            $product=ProductMod::find($id);
-            echo "Product name Is : ".$product->name;
-            echo "<br /> Shop Ower Is : ".$product->shop->name;
-
-              
-
-
+        //
     }
 
     /**
@@ -147,7 +147,10 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        //
+        $cities = CityMod::all();
+        $item   = UserMod::find($id);
+        //dd($item);
+        return view('admin.users.edit', compact('item', 'cities'));
     }
 
     /**
@@ -157,20 +160,34 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserRequest $request, $id)
     {
-        //
-    }
+        $request->validated();
+        $mod = UserMod::find($id);
+        $mod->name     = $request->name;
+        $mod->surname  = $request->surname;
+        //$mod->email    = $request->email;
+        $mod->mobile   = $request->mobile;
+        $mod->surname  = $request->surname;
+        $mod->age      = $request->age;
+        $mod->address  = $request->address;
+        $mod->city     = $request->city;
+        $mod->save();
 
+        return redirect('admin/users')
+                    ->with('success', 'User ['.$request->name.'] updated successfully.');
+    }
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        //
+        $mod = UserMod::find($id);
+        $mod->delete();
+        return redirect('admin/users')
+                ->with('success', 'User ['.$mod->name.'] deleted successfully.');
     }
-            }
-
+}
